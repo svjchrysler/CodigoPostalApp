@@ -107,6 +107,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 progressDialog.dismiss();
                                 Toast.makeText(LoginActivity.this, "Problemas con el servidor vuelva a intentarlo " + e.toString(), Toast.LENGTH_SHORT).show();
                             }
+                        } else {
+                            progressDialog.dismiss();
+                            Toast.makeText(LoginActivity.this, "usuario Invalido ", Toast.LENGTH_SHORT).show();
                         }
                     }
 

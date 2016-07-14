@@ -88,7 +88,7 @@ public class RegisterUbicationActivity extends AppCompatActivity implements View
         configComponents();
         configEvents();
         configLocation();
-        cargarProvincias();
+        cargarMunicipios();
     }
 
     private void configEvents() {
@@ -136,10 +136,7 @@ public class RegisterUbicationActivity extends AppCompatActivity implements View
         }
     }
 
-    private void cargarProvincias() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Cargando informacion necesaria");
-        progressDialog.show();
+    private void cargarMunicipios() {
         final LinkedList<Province> listProvinces = new LinkedList<>();
         StringRequest jsonObjectRequest = new StringRequest(Request.Method.GET,
                 Urls.URL_LISTA_MUNICIPIOS,
@@ -154,9 +151,7 @@ public class RegisterUbicationActivity extends AppCompatActivity implements View
                             }
                             ArrayAdapter adapter = new ArrayAdapter(getBaseContext(), android.R.layout.simple_dropdown_item_1line, listProvinces);
                             spMunicipalities.setAdapter(adapter);
-                            progressDialog.dismiss();
                         } catch (JSONException e) {
-                            progressDialog.dismiss();
                             e.printStackTrace();
                         }
                     }
@@ -165,8 +160,7 @@ public class RegisterUbicationActivity extends AppCompatActivity implements View
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Error", error.getMessage().toString());
-                        progressDialog.dismiss();
+                        Toast.makeText(RegisterUbicationActivity.this, "Error en el servidor", Toast.LENGTH_SHORT).show();
                     }
                 }
         );

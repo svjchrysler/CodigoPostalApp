@@ -48,7 +48,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvId.setText(listUbications.get(position).id);
-        holder.tvCalle.setText(listUbications.get(position).calle);
+        holder.tvCalle.setText(listUbications.get(position).calle.toUpperCase());
         holder.tvCodigoPostal.setText(listUbications.get(position).codigoPostal);
 
         String imageEncode = listUbications.get(position).imagen;
