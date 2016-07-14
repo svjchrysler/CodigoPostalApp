@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Codigo Postal</string>
+
+    <string name="titleIce">ICE</string>
+    <string name="titleIniciarSesion">Iniciar Sesion</string>
+    <string name="titleRegistrarse">Registro</string>
+
+    <string name="login">Inicia Sesion</string>
+    <string name="con">con tu cuenta de</string>
+    <string name="o">O</string>
+    <string name="facebook">Facebook</string>
+    <string name="sincuenta">No tienes una cuenta registrate</string>
+    <string name="concuenta">Ya tienes cuenta inicia sesion</string>
+    <string name="registrate">Registrar</string>
+
+    <string name="fullname">Nombre Completo</string>
+    <string name="profession">Profesion</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="retrypassword">Repetir Password</string>
+
+    <string name="nameStreet">Nombre de la Calle</string>
+    <string name="province">Provincia</string>
+    <string name="galeria">Galeria</string>
+    <string name="camara">Camara</string>
+
+    <string name="ubications">Ubicaciones Registradas</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="regiterLocation">Registrar Ubicacion</string>
+    <string name="presiona">Obtener Ubicacion</string>
+
+    <string name="enviarInvitacion">Enviar Invitacion</string>
+</resources>
