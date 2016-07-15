@@ -15,7 +15,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
             android:textSize="50sp"
             android:textStyle="bold"
             android:text="@string/login" />
@@ -39,6 +39,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/facebook"
+                android:paddingTop="25dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:paddingBottom="25dp"
                 android:id="@+id/btnLoginFacebook"
                 android:layout_gravity="center_horizontal" />
 
@@ -53,6 +57,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
+                android:paddingTop="25dp"
+                android:paddingLeft="45dp"
+                android:paddingRight="45dp"
+                android:paddingBottom="25dp"
                 android:id="@+id/btnLoginEmail"
                 android:layout_gravity="center_horizontal" />
 

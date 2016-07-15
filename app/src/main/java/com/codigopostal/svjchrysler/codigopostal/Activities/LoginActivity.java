@@ -2,12 +2,11 @@ package com.codigopostal.svjchrysler.codigopostal.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,10 +59,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void configComponents() {
-        edtEmail = (EditText)findViewById(R.id.edtEmail);
-        edtPassword = (EditText)findViewById(R.id.edtPassword);
-        tvRegister = (TextView)findViewById(R.id.tvRegister);
-        btnLogin = (Button)findViewById(R.id.btnLogin);
+        edtEmail = (EditText) findViewById(R.id.edtEmail);
+        edtPassword = (EditText) findViewById(R.id.edtPassword);
+        tvRegister = (TextView) findViewById(R.id.tvRegister);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
 
         validator = new Validator(this);
     }
@@ -99,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
                                 UserLogin.id = jsonObject.getString("id");
-                                UserLogin.nombre =  jsonObject.getString("name");
+                                UserLogin.nombre = jsonObject.getString("name");
                                 Toast.makeText(LoginActivity.this, "Login Correcto", Toast.LENGTH_SHORT).show();
                                 redirectListUbications();
                                 progressDialog.dismiss();
@@ -159,16 +158,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
-        for (ValidationError error : errors)
-        {
+        for (ValidationError error : errors) {
             View view = error.getView();
             String message = error.getCollatedErrorMessage(this);
 
             if (view instanceof EditText) {
                 ((EditText) view).setError(message);
-            }
-            else
-            {
+            } else {
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             }
         }

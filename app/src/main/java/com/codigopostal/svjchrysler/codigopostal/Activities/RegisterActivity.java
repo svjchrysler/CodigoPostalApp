@@ -2,9 +2,8 @@ package com.codigopostal.svjchrysler.codigopostal.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -158,16 +157,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
-        for (ValidationError error : errors)
-        {
+        for (ValidationError error : errors) {
             View view = error.getView();
             String message = error.getCollatedErrorMessage(this);
 
             if (view instanceof EditText) {
                 ((EditText) view).setError(message);
-            }
-            else
-            {
+            } else {
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             }
         }

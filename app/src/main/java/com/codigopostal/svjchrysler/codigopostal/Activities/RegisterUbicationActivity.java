@@ -11,11 +11,10 @@ import android.location.Geocoder;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -51,7 +50,6 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -96,13 +94,13 @@ public class RegisterUbicationActivity extends AppCompatActivity implements View
     }
 
     private void configComponents() {
-        edtCalle = (EditText)findViewById(R.id.edtCalle);
-        tvCoordenada = (TextView)findViewById(R.id.tvLocation);
-        spMunicipalities = (Spinner)findViewById(R.id.spMunicipalities);
-        rbCamara = (RadioButton)findViewById(R.id.rbCamara);
-        rbGaleria = (RadioButton)findViewById(R.id.rbGaleria);
-        imgBtnOption = (ImageButton)findViewById(R.id.btnOption);
-        imgFoto = (ImageView)findViewById(R.id.imgFoto);
+        edtCalle = (EditText) findViewById(R.id.edtCalle);
+        tvCoordenada = (TextView) findViewById(R.id.tvLocation);
+        spMunicipalities = (Spinner) findViewById(R.id.spMunicipalities);
+        rbCamara = (RadioButton) findViewById(R.id.rbCamara);
+        rbGaleria = (RadioButton) findViewById(R.id.rbGaleria);
+        imgBtnOption = (ImageButton) findViewById(R.id.btnOption);
+        imgFoto = (ImageView) findViewById(R.id.imgFoto);
     }
 
     private void configText() {
@@ -128,7 +126,7 @@ public class RegisterUbicationActivity extends AppCompatActivity implements View
                 if (!list.isEmpty()) {
                     userLatitude = String.valueOf(loc.getLatitude());
                     userLength = String.valueOf(loc.getLongitude());
-                    tvCoordenada.setText("lat: "+loc.getLatitude()+", lon: "+loc.getLongitude());
+                    tvCoordenada.setText("lat: " + loc.getLatitude() + ", lon: " + loc.getLongitude());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -145,7 +143,7 @@ public class RegisterUbicationActivity extends AppCompatActivity implements View
                     public void onResponse(String response) {
                         try {
                             JSONArray array = new JSONArray(response);
-                            for (int i=0;i<array.length();i++){
+                            for (int i = 0; i < array.length(); i++) {
                                 JSONObject jsonObject = array.getJSONObject(i);
                                 listProvinces.add(new Province(jsonObject.getString("id"), jsonObject.getString("name")));
                             }
@@ -175,34 +173,34 @@ public class RegisterUbicationActivity extends AppCompatActivity implements View
         progressDialog.show();
 
         StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
-            Urls.URL_REGISTRAR_UBICACION,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    progressDialog.dismiss();
-                    redirectListUbications();
-                }
+                Urls.URL_REGISTRAR_UBICACION,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        redirectListUbications();
+                    }
 
-                private void redirectListUbications() {
-                    Intent intent = new Intent(RegisterUbicationActivity.this, ListUbicationsActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.right_in, R.anim.right_out);
-                    finish();
-                }
-            },
+                    private void redirectListUbications() {
+                        Intent intent = new Intent(RegisterUbicationActivity.this, ListUbicationsActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.right_in, R.anim.right_out);
+                        finish();
+                    }
+                },
 
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(RegisterUbicationActivity.this, "Error con el servidor", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                }
-            }) {
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(RegisterUbicationActivity.this, "Error con el servidor", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("person_id", UserLogin.id);
-                params.put("municipality_id", ((Province)spMunicipalities.getSelectedItem()).id.toString());
+                params.put("municipality_id", ((Province) spMunicipalities.getSelectedItem()).id.toString());
                 params.put("streetName", edtCalle.getText().toString());
                 params.put("latitude", userLatitude);
                 params.put("length", userLength);
@@ -275,13 +273,12 @@ public class RegisterUbicationActivity extends AppCompatActivity implements View
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1 && resultCode == RESULT_OK && data.getData() != null) {
+        if (requestCode == 1 && resultCode == RESULT_OK && data.getData() != null) {
             Uri uri = data.getData();
             galleryPhoto.setPhotoUri(uri);
             String photoPath = galleryPhoto.getPath();
             cargarImagen(photoPath);
-        }
-        else {
+        } else {
             String photoPath = cameraPhoto.getPhotoPath();
             cargarImagen(photoPath);
         }

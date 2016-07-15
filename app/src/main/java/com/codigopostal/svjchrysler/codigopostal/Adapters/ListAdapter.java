@@ -23,13 +23,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         public TextView tvCalle, tvCodigoPostal, tvId;
         public ImageView imgHouse;
+
         public ViewHolder(View v) {
             super(v);
-            tvCalle = (TextView)v.findViewById(R.id.tvCalle);
-            tvCodigoPostal = (TextView)v.findViewById(R.id.tvCodigoPostal);
-            tvId = (TextView)v.findViewById(R.id.tvId);
+            tvCalle = (TextView) v.findViewById(R.id.tvCalle);
+            tvCodigoPostal = (TextView) v.findViewById(R.id.tvCodigoPostal);
+            tvId = (TextView) v.findViewById(R.id.tvId);
 
-            imgHouse = (ImageView)v.findViewById(R.id.imgHouse);
+            imgHouse = (ImageView) v.findViewById(R.id.imgHouse);
         }
     }
 
@@ -48,8 +49,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvId.setText(listUbications.get(position).id);
-        holder.tvCalle.setText(listUbications.get(position).calle.toUpperCase());
-        holder.tvCodigoPostal.setText(listUbications.get(position).codigoPostal);
+        holder.tvCalle.setText("Direccion: " + listUbications.get(position).calle);
+        holder.tvCodigoPostal.setText("Codigo Postal: " + listUbications.get(position).codigoPostal);
 
         String imageEncode = listUbications.get(position).imagen;
         byte[] decodeString = Base64.decode(imageEncode, Base64.DEFAULT);

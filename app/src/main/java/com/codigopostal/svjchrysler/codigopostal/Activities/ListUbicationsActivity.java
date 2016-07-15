@@ -2,8 +2,8 @@ package com.codigopostal.svjchrysler.codigopostal.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -27,9 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
 public class ListUbicationsActivity extends AppCompatActivity {
 
@@ -61,7 +59,7 @@ public class ListUbicationsActivity extends AppCompatActivity {
     }
 
     private void configComponents() {
-        recyclerListUbications = (RecyclerView)findViewById(R.id.reciclerListUbications);
+        recyclerListUbications = (RecyclerView) findViewById(R.id.reciclerListUbications);
         recyclerListUbications.setHasFixedSize(true);
 
         layoutManagerListUbications = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -93,40 +91,40 @@ public class ListUbicationsActivity extends AppCompatActivity {
         progressDialog.setMessage("Cargando Ubicaciones Registradas");
         progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-            Urls.URL_LISTA_UBICACIONES + UserLogin.id,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONArray array = new JSONArray(response);
-                        for (int i=0;i<array.length();i++){
-                            JSONObject jsonObject = array.getJSONObject(i);
-                            Ubication ubication = new Ubication();
-                            ubication.id = jsonObject.getString("id");
-                            ubication.codigoPostal = jsonObject.getString("codePostal");
-                            ubication.calle = jsonObject.getString("streetName");
-                            ubication.imagen = jsonObject.getString("nameImage");
-                            listUbications.add(ubication);
+                Urls.URL_LISTA_UBICACIONES + UserLogin.id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array = new JSONArray(response);
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject jsonObject = array.getJSONObject(i);
+                                Ubication ubication = new Ubication();
+                                ubication.id = jsonObject.getString("id");
+                                ubication.codigoPostal = jsonObject.getString("codePostal");
+                                ubication.calle = jsonObject.getString("streetName");
+                                ubication.imagen = jsonObject.getString("nameImage");
+                                listUbications.add(ubication);
+                            }
+                            cargarAdapter();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        cargarAdapter();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        progressDialog.dismiss();
                     }
-                    progressDialog.dismiss();
-                }
 
-                private void cargarAdapter() {
-                    adapterListUbications = new ListAdapter(listUbications);
-                    recyclerListUbications.setAdapter(adapterListUbications);
+                    private void cargarAdapter() {
+                        adapterListUbications = new ListAdapter(listUbications);
+                        recyclerListUbications.setAdapter(adapterListUbications);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(ListUbicationsActivity.this, "Error en el servidor Intentarlo mas tarde", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progressDialog.dismiss();
-                    Toast.makeText(ListUbicationsActivity.this, "Error en el servidor Intentarlo mas tarde", Toast.LENGTH_SHORT).show();
-                }
-            }
         );
 
         RequestQueue request = Volley.newRequestQueue(this);
